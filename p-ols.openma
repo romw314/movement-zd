@@ -1,0 +1,8 @@
+#!/bin/bash
+
+f="$(man -w "$1")"
+xx="$(cat "$f")"
+[[ "$f" == *.gz ]] && xx="`gzip -d < $xx`"
+xx="${xx/$'\n'/""}"
+xx="${xx/.br/$'\n'}"
+less <<< "$xx"

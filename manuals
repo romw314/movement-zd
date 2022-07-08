@@ -1,0 +1,2 @@
+#!/bin/echo Usage: .
+export MANPATH="$(manpath):$(pwd)/man"

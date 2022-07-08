@@ -16,6 +16,11 @@ Win32
 # Linux executable
 movement-zd
 
+# Other files
+xfiles
+*[.-]log
+*[.-]cache
+
 # .C++.gitignore
 # Prerequisite
 *.d

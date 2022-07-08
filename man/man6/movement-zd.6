@@ -1,0 +1,73 @@
+.TH MOVEMENT-ZD 6
+.SH NAME
+movement-zd \- the Movement-ZD eating game
+.SH SYNOPSIS
+.B movement-zd
+[\fIoptions\fR] [\fImap\fR]
+.SH DESCRIPTION
+If
+.U map
+isn\(aqt specified, it is set to 0. If the map is the lowercase \(lqx\(rq, a random map is generated.
+The map is created from these elements:
+.br
+.RS
+red # \- player
+green # \- eating player
+yellow * \- food
+white ^ \- anti-toucher
+.RE
+.sp
+When you eat all the foods, you won and when you touch anti-toucher, you lose.
+.SH OPTIONS
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Display a short help and exit.
+.TP
+\fB\-t\fR, \fB\-\-timeout\fR=\fItimeout\fR
+Player loses when
+.U timeout
+is up, 0 for no timeout. If no \fB--timeout\fR specified, the timeout is 45.
+.TP
+\fB\-n\fR, \fB\-\-no\-timeout\fR, \fB\-\-disabled\-timeout\fR
+Same as \fB\-\-timeout\fR=\fI0\fR.
+.TP
+\fB\-a\fR, \fB\-\-anti\-touchers
+Play a game with anti\-touchers. Same as \fB\-\-advanced\fR=\fIa1\fR
+.TP
+\fB\-d\fR, \fB\-\-advanced\fR=\fIadvanced\-option\fR
+Parse \fIadvanced\-option\fR as an Movement-ZD advanced option, see the
+.B ADVANCED OPTIONS
+section for more information.
+.SH ADVANCED OPTIONS
+Advanced options is in the following format:
+"{\fIoption\-character\fR}{\fIoption\-argument\fR}"
+.br
+For example, \(lqa47\(rq is parsed as advanced option \(lqa\(rq with argument 47.
+.sp
+.B Available advanced options:
+.RS
+.TP
+\fBa\fR{\fIanti\-toucher\-max\-rand\fR}
+Set anti\-toucher max random value to \fIanti\-toucher\-max\-rand\fR. For example, when \fB\-\-advanced\fR=\fIa47\fR is specified, 0 is food, 1 \- 47 is anti\-toucher and 48-infinity is empty.
+.TP
+\fRm\fR{\fIls\fR}{\fIrs\fR}{\fIts\fR}{\fIbs\fR}{\fItl\fR}{\fItr\fR}{\fIbl\fR}{\fIbr\fR}
+Set the border characters. Overrides the default border characters.
+.br
+.RS
+\fIls\fR \- left side
+.br
+\fIrs\fR \- right side
+.br
+\fIts\fR \- top side
+.br
+\fIbs\fR \- bottom side
+.br
+\fItl\fR \- top left-hand corner
+.br
+\fItr\fR \- top right-hand corner
+.br
+\fIbl\fR \- bottom left-hand corner
+.br
+\fIbr\fR \- bottom right-hand corner
+.RE
+.RE
