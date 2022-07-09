@@ -45,8 +45,8 @@ int main(int argc, char * const *argv) {
 	init_pair(TIME_PAIR, COLOR_MAGENTA, COLOR_WHITE);
 	init_pair(TIME_LOW_PAIR, COLOR_WHITE, COLOR_RED);
 	init_pair(ANTI_TOUCHER_PAIR, COLOR_BLUE, COLOR_WHITE);
-	int cury, curx, gp, isns, incht, lose_attc, timend, attc;
-	attc = lose_attc = timend = 0;
+	int cury, curx, gp, isns, isns_extra, incht, lose_attc, timend, attc;
+	isns_extra = attc = lose_attc = timend = 0;
 
 	time_t vtime = 45;
 	int opt;
@@ -90,6 +90,8 @@ int main(int argc, char * const *argv) {
 				else if (aopt == 'm')
 					for (int i = 0; i < 8; i++)
 						bv[i] = arg[i];
+				else if (aopt == 'x')
+					isns_extra = atoi(arg);
 				else {
 					endwin();
 					fprintf(stderr, "%s: unrecognized anvanced option: /%c/%s/\n", argv[0], aopt, arg);
@@ -105,13 +107,13 @@ int main(int argc, char * const *argv) {
 	for (int y = 1; y < LINES - 1; y++)
 		for (int x = 1; x < COLS - 1; x++) {
 			isns = rand() % NSPC;
-			if (!isns) {
+			if (isns <= isns_extra) {
 				gp++;
 				attron(COLOR_PAIR(SPC_PAIR));
 			}
 			else if (attc && isns <= attc)
 				attron(COLOR_PAIR(ANTI_TOUCHER_PAIR));
-			mvaddch(y, x, isns ? ((attc && isns <= attc) ? '^' : '+') : '*');
+			mvaddch(y, x, (isns > isns_extra) ? ((attc && isns <= attc) ? '^' : '+') : '*');
 			attroff(COLOR_PAIR(SPC_PAIR));
 		}
 	attron(COLOR_PAIR(BORDER_PAIR));
@@ -204,27 +206,23 @@ int main(int argc, char * const *argv) {
 		const char *wintext = gp ? "You Lose!" : "You Win!";
 //		const char *sltext = (retfc<const char *, pair<bool, const char *>>("", MKRCP(timend, "Time out.")));
 		const char *sltext = NULL;
+		const char *tltext = gp ? "Press q to quit" : NULL;
 		STS(sltext, timend, "Time out.");
 		TS(sltext, lose_attc, "Anti-toucher.");
+		ETS(sltext, "Press q to quit");
 		const int winlen = strlen(wintext);
 		const int sllen = sltext ? strlen(sltext) : 0;
+		const int tllen = tltext ? strlen(tltext) : 0;
 		wattron(win, COLOR_PAIR(gp ? LOSE_PAIR : WIN_PAIR));
 		mvwaddstr(win, (nlines / 2) - 1, (ncols / 2) - (winlen / 2), wintext);
 		if (sltext)
 			mvwaddstr(win, (nlines / 2), (ncols / 2) - (sllen / 2), sltext);
+		if (tltext)
+			mvwaddstr(win, (nlines / 2) + 1, (ncols / 2) - (tllen / 2), tltext);
 		wattroff(win, COLOR_PAIR(WIN_PAIR));
 		wattroff(win, COLOR_PAIR(LOSE_PAIR));
 		wrefresh(win);
-		while (1) {
-			switch (getch()) {
-				case KEY_LEFT:
-				case KEY_RIGHT:
-				case KEY_UP:
-				case KEY_DOWN:
-					continue;
-			}
-			break;
-		}
+		while (getch() != 'q');
 	}
 
 	endwin();

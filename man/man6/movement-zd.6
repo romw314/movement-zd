@@ -12,8 +12,11 @@ The map is created from these elements:
 .br
 .RS
 red # \- player
+.br
 green # \- eating player
+.br
 yellow * \- food
+.br
 white ^ \- anti-toucher
 .RE
 .sp
@@ -48,11 +51,13 @@ For example, \(lqa47\(rq is parsed as advanced option \(lqa\(rq with argument 47
 .RS
 .TP
 \fBa\fR{\fIanti\-toucher\-max\-rand\fR}
-Set anti\-toucher max random value to \fIanti\-toucher\-max\-rand\fR. For example, when \fB\-\-advanced\fR=\fIa47\fR is specified, 0 is food, 1 \- 47 is anti\-toucher and 48-infinity is empty.
+Set anti\-toucher maximum random value to \fIanti\-toucher\-max\-rand\fR. For example, when \fB\-\-advanced\fR=\fIa47\fR is specified, 0 is food, 1\-47 is anti\-toucher and 48\-infinity is empty.
+.sp
 .TP
-\fRm\fR{\fIls\fR}{\fIrs\fR}{\fIts\fR}{\fIbs\fR}{\fItl\fR}{\fItr\fR}{\fIbl\fR}{\fIbr\fR}
+\fBm\fR{\fIls\fR}{\fIrs\fR}{\fIts\fR}{\fIbs\fR}{\fItl\fR}{\fItr\fR}{\fIbl\fR}{\fIbr\fR}
 Set the border characters. Overrides the default border characters.
 .br
+.RS
 .RS
 \fIls\fR \- left side
 .br
@@ -70,4 +75,8 @@ Set the border characters. Overrides the default border characters.
 .br
 \fIbr\fR \- bottom right-hand corner
 .RE
+.RE
+.TP
+\fBx\fR{\fIfood\-max\-rand\fR}
+Set the food maximum random value to \fIfood\-max\-rand\fR. For example, when \fB\-\-advanced\fR=\fIa47\fR and \fB\-\-advanced\fR=\fIx12\fR is specified, 0\-12 is food, 13\-47 is anti\-toucher and 48\-infinity is empty.
 .RE
