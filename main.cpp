@@ -25,7 +25,11 @@
 #define NSPC NSPC_W
 
 #ifndef DEFAULT_ALERT
+#ifdef ALERT_2
+#define DEFAULT_ALERT flash
+#else
 #define DEFAULT_ALERT beep
+#endif
 #endif
 
 int main(int argc, char * const *argv) {
@@ -35,7 +39,8 @@ int main(int argc, char * const *argv) {
 	timeout(250);
 	curs_set(0);
 	keypad(stdscr, TRUE);
-	start_color();
+	if (has_colors())
+		start_color();
 	init_pair(PLAYER_PAIR, COLOR_WHITE, COLOR_RED);
 	init_pair(PLAYER_G_PAIR, COLOR_WHITE, COLOR_GREEN);
 	init_pair(SPC_PAIR, COLOR_CYAN, COLOR_YELLOW);
