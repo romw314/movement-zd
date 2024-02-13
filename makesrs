@@ -1,3 +1,0 @@
-make
-make clean
-make "PARAMS=-DDEFAULT_ALERT=flash"
