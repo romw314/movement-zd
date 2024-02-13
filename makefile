@@ -9,7 +9,7 @@ LINK_PARAMS?=
 BIN?=/usr/bin
 LOCAL_BIN?=/usr/local/bin
 BIN_NAME?=movement-zd
-INSTALL_EXEC=$(BIN)/$(BIN_NAME) $(LOCAL_BIN)/$(BIN_NAME)
+INSTALL_EXEC=$(LOCAL_BIN)/$(BIN_NAME)
 INSTALLS=$(INSTALL_EXEC)
 
 ADDITIONAL_OPTIONS:=$(shell cat additional_cc_options | tr "\n" " ")
