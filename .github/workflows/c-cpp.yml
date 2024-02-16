@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: sudo apt install ninja-build clang
+    - run: sudo apt update
+    - run: sudo apt install -y ninja-build clang
     - uses: actions/checkout@v3
     - run: cmake --workflow --preset default
       env:
